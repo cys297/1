@@ -1,39 +1,3 @@
-/*
-扫雷游戏：
-
-初级：10个  9*9
-中级：40个  16*16
-高级：99个  28*28
-
-第一步：
-输出一个
-
-    [
-        [1, 9, 2, 1],
-        [2, 4, 9, 2],
-        [9, 4, 9, 2],
-        [2, 9, 2, 1],
-    ]
-
-这样的数组，其中需要的数值有：1，雷的数量  2，行数和列数
-
-    实现步骤：
-        1，根据行数和列数创建一个多维数组（使用 for 循环嵌套实现）
-        2，然后使用 Math 随机 a[x][x] 来写入雷的位置（再次使用 for 循环，写入 1）
-              如果位置已经有雷了就重写随机然后写入
-        3，bibibibibi --> 实现上述的数组
-              过程：1，先生成一行
-                2，复制成列
-                3.塞入雷
-                   4.写一个函数实现：如果数组位置上的值为 1 的话，就给边上一圈的值加 1，
-
-第二步：
-进行操作：
-    当点击到 0 的值的时候，
-    开始遍历边上一圈的值（打开所有边上的值），如果值也是 0 的话，就接着遍历边上一圈的值，直到没有为止。
-        这里可以写一个函数，当点击到 0 的时候就用这个函数，然后给边上还是 0 的继续使用这个函数
-*/
-
 // 1，生成一张雷的地图
 var mineSweepingMap = function (r, c, num) {
     var map = []
@@ -303,9 +267,9 @@ var clearMine = function (row, col, num) {
                 }
                 if (el.tagName === 'LI') {
                     var classList = el.children[1].classList
+                    var residue = document.querySelector('.residue')
                     // 已经被点击过的地方不能标记
                     if (classList.contains('hide') && el.style.background !== 'white') {
-                        var residue = document.querySelector('.residue')
                         if (mineNum !== 0) {
                             mineNum--
                         }
@@ -313,6 +277,10 @@ var clearMine = function (row, col, num) {
                         classList.remove('hide')
                     } else if (el.style.background !== 'white') {
                         classList.add('hide')
+                        if (mineNum !== 40) {
+                            mineNum++
+                        }
+                        residue.innerText = `${mineNum}`
                     }
                 }
             })

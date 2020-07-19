@@ -219,9 +219,9 @@ var clearMine = function (row, col, num) {
                 }
                 if (el.tagName === 'LI') {
                     var classList = el.children[1].classList
+                    var residue = document.querySelector('.residue')
                     // 已经被点击过的地方不能标记
                     if (classList.contains('hide') && el.style.background !== 'white') {
-                        var residue = document.querySelector('.residue')
                         if (mineNum !== 0) {
                             mineNum--
                         }
@@ -229,6 +229,10 @@ var clearMine = function (row, col, num) {
                         classList.remove('hide')
                     } else if (el.style.background !== 'white') {
                         classList.add('hide')
+                        if (mineNum !== 40) {
+                            mineNum++
+                        }
+                        residue.innerText = `${mineNum}`
                     }
                 }
             })
